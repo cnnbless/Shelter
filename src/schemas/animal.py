@@ -1,14 +1,14 @@
-from pydantic import BaseModel, ConfigDict
 from datetime import datetime
-from typing import Optional
+
+from pydantic import BaseModel, ConfigDict
 
 
 class AnimalBase(BaseModel):
     name: str
     species: str
-    breed: Optional[str] = None
-    age: Optional[int] = None
-    health_status: Optional[str] = None
+    breed: str | None = None
+    age: int | None = None
+    health_status: str | None = None
 
 
 class AnimalCreate(AnimalBase):

@@ -1,9 +1,10 @@
 import asyncio
+
 from sqlalchemy.future import select
 
-from src.db.session import AsyncSessionLocal
-from src.models.entities import User, Role
 from src.core.security import get_password_hash
+from src.db.session import AsyncSessionLocal
+from src.models.entities import Role, User
 
 
 async def create_superuser(email: str, password: str):

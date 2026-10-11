@@ -1,15 +1,19 @@
 import enum
+
 from sqlalchemy import (
+    Boolean,
     Column,
+    DateTime,
+    ForeignKey,
     Integer,
     String,
-    Boolean,
-    Enum as SQLEnum,
-    ForeignKey,
     Text,
-    DateTime,
+)
+from sqlalchemy import (
+    Enum as SQLEnum,
 )
 from sqlalchemy.sql import func
+
 from src.models.base import Base
 
 

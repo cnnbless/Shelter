@@ -1,4 +1,4 @@
-from sqlalchemy.ext.asyncio import create_async_engine, async_sessionmaker
+from sqlalchemy.ext.asyncio import async_sessionmaker, create_async_engine
 
 SQLALCHEMY_DATABASE_URL = (
     "postgresql+asyncpg://postgres:1244ag@localhost:5432/shelter_db"

@@ -1,9 +1,9 @@
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
-from src.api.shelters import router as shelters_router
 from src.api.animals import router as animals_router
 from src.api.auth import router as auth_router
+from src.api.shelters import router as shelters_router
 
 app = FastAPI(title="Shelter Platform API")
 

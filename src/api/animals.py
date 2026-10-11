@@ -1,13 +1,13 @@
-from fastapi import APIRouter, Depends, Query, UploadFile, File, HTTPException
+import os
+import shutil
+
+from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.future import select
-from typing import List, Optional
-import shutil
-import os
 
+from src.api.dependencies import get_db, require_admin
 from src.models.entities import Animal
 from src.schemas.animal import AnimalCreate, AnimalResponse
-from src.api.dependencies import get_db, require_admin
 
 router = APIRouter(prefix="/animals", tags=["animals"])
 
@@ -30,7 +30,7 @@ async def upload_animal_media(animal_id: int, file: UploadFile = File(...)):
         with open(file_path, "wb+") as buffer:
             shutil.copyfileobj(file.file, buffer)
     except Exception as e:
-        raise HTTPException(status_code=500, detail=f"Failed to write file: {str(e)}")
+        raise HTTPException(status_code=500, detail=f"Failed to write file: {e!s}")
 
     return {
         "file_path": file_path,
@@ -38,12 +38,12 @@ async def upload_animal_media(animal_id: int, file: UploadFile = File(...)):
     }
 
 
-@router.get("/", response_model=List[AnimalResponse])
+@router.get("/", response_model=list[AnimalResponse])
 async def get_animals(
-    species: Optional[str] = Query(None),
-    breed: Optional[str] = Query(None),
-    min_age: Optional[int] = Query(None),
-    max_age: Optional[int] = Query(None),
+    species: str | None = Query(None),
+    breed: str | None = Query(None),
+    min_age: int | None = Query(None),
+    max_age: int | None = Query(None),
     db: AsyncSession = Depends(get_db),
 ):
     query = select(Animal)
