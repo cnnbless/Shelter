@@ -4,4 +4,8 @@ sqlalchemy
 asyncpg
 alembic
 pydantic
+ruff
+pre-commit
 python-multipart
+passlib[bcrypt]
+PyJWT
